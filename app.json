@@ -1,0 +1,781 @@
+{
+  "id": "com.hubitat.elevation",
+  "version": "1.5.0",
+  "compatibility": ">=12.2.0",
+  "sdk": 3,
+  "platforms": [
+    "local"
+  ],
+  "name": {
+    "en": "Hubitat Elevation",
+    "nl": "Hubitat Elevation",
+    "de": "Hubitat Elevation",
+    "es": "Hubitat Elevation",
+    "fr": "Hubitat Elevation"
+  },
+  "description": {
+    "en": "Home Automation the way it is meant to be",
+    "nl": "Domotica zoals het bedoeld is",
+    "de": "Hausautomation, wie sie sein sollte",
+    "es": "La automatización del hogar tal como debe ser",
+    "fr": "La domotique comme elle devrait être"
+  },
+  "category": [
+    "internet"
+  ],
+  "brandColor": "#7FBD00",
+  "permissions": [],
+  "images": {
+    "large": "/assets/images/large.png",
+    "small": "/assets/images/small.png",
+    "xlarge": "/assets/images/xlarge.png"
+  },
+  "author": {
+    "name": "Douglas Krug",
+    "email": "contact@smarthomeprimer.com"
+  },
+  "contributors": {
+    "developers": [
+      {
+        "name": "Claude (Anthropic AI Assistant)",
+        "email": "ai-assistant@anthropic.com",
+        "role": "Primary developer - Full application development from v1.0.0 through v1.4.9"
+      }
+    ]
+  },
+  "drivers": [
+    {
+      "id": "switch",
+      "name": {
+        "en": "Switch",
+        "nl": "Schakelaar",
+        "de": "Schalter",
+        "es": "Interruptor",
+        "fr": "Interrupteur"
+      },
+      "class": "socket",
+      "capabilities": [
+        "onoff"
+      ],
+      "images": {
+        "small": "/drivers/switch/assets/images/small.png",
+        "large": "/drivers/switch/assets/images/large.png"
+      },
+      "pair": [
+        {
+          "id": "list_devices",
+          "template": "list_devices",
+          "navigation": {
+            "next": "add_devices"
+          }
+        },
+        {
+          "id": "add_devices",
+          "template": "add_devices"
+        }
+      ]
+    },
+    {
+      "id": "dimmer",
+      "name": {
+        "en": "Dimmer",
+        "nl": "Dimmer",
+        "de": "Dimmer",
+        "es": "Regulador",
+        "fr": "Variateur"
+      },
+      "class": "light",
+      "capabilities": [
+        "onoff",
+        "dim"
+      ],
+      "pair": [
+        {
+          "id": "list_devices",
+          "template": "list_devices",
+          "navigation": {
+            "next": "add_devices"
+          }
+        },
+        {
+          "id": "add_devices",
+          "template": "add_devices"
+        }
+      ],
+      "images": {
+        "small": "/drivers/dimmer/assets/images/small.png",
+        "large": "/drivers/dimmer/assets/images/large.png"
+      }
+    },
+    {
+      "id": "color-light",
+      "name": {
+        "en": "Color Light",
+        "nl": "Kleurenlamp",
+        "de": "Farblicht",
+        "es": "Luz de Color",
+        "fr": "Lumière Couleur"
+      },
+      "class": "light",
+      "capabilities": [
+        "onoff",
+        "dim",
+        "light_hue",
+        "light_saturation",
+        "light_temperature",
+        "light_mode"
+      ],
+      "pair": [
+        {
+          "id": "list_devices",
+          "template": "list_devices",
+          "navigation": {
+            "next": "add_devices"
+          }
+        },
+        {
+          "id": "add_devices",
+          "template": "add_devices"
+        }
+      ],
+      "images": {
+        "small": "/drivers/color-light/assets/images/small.png",
+        "large": "/drivers/color-light/assets/images/large.png"
+      }
+    },
+    {
+      "id": "lock",
+      "name": {
+        "en": "Lock",
+        "nl": "Slot",
+        "de": "Schloss",
+        "es": "Cerradura",
+        "fr": "Serrure"
+      },
+      "class": "lock",
+      "capabilities": [
+        "locked"
+      ],
+      "pair": [
+        {
+          "id": "list_devices",
+          "template": "list_devices",
+          "navigation": {
+            "next": "add_devices"
+          }
+        },
+        {
+          "id": "add_devices",
+          "template": "add_devices"
+        }
+      ],
+      "images": {
+        "small": "/drivers/lock/assets/images/small.png",
+        "large": "/drivers/lock/assets/images/large.png"
+      }
+    },
+    {
+      "id": "thermostat",
+      "name": {
+        "en": "Thermostat",
+        "nl": "Thermostaat",
+        "de": "Thermostat",
+        "es": "Termostato",
+        "fr": "Thermostat"
+      },
+      "class": "thermostat",
+      "capabilities": [
+        "target_temperature",
+        "measure_temperature",
+        "thermostat_mode"
+      ],
+      "pair": [
+        {
+          "id": "list_devices",
+          "template": "list_devices",
+          "navigation": {
+            "next": "add_devices"
+          }
+        },
+        {
+          "id": "add_devices",
+          "template": "add_devices"
+        }
+      ],
+      "images": {
+        "small": "/drivers/thermostat/assets/images/small.png",
+        "large": "/drivers/thermostat/assets/images/large.png"
+      }
+    },
+    {
+      "id": "contact-sensor",
+      "name": {
+        "en": "Contact Sensor",
+        "nl": "Contactsensor",
+        "de": "Kontaktsensor",
+        "es": "Sensor de Contacto",
+        "fr": "Capteur de Contact"
+      },
+      "class": "sensor",
+      "capabilities": [
+        "alarm_contact"
+      ],
+      "pair": [
+        {
+          "id": "list_devices",
+          "template": "list_devices",
+          "navigation": {
+            "next": "add_devices"
+          }
+        },
+        {
+          "id": "add_devices",
+          "template": "add_devices"
+        }
+      ],
+      "images": {
+        "small": "/drivers/contact-sensor/assets/images/small.png",
+        "large": "/drivers/contact-sensor/assets/images/large.png"
+      }
+    },
+    {
+      "id": "motion-sensor",
+      "name": {
+        "en": "Motion Sensor",
+        "nl": "Bewegingssensor",
+        "de": "Bewegungssensor",
+        "es": "Sensor de Movimiento",
+        "fr": "Capteur de Mouvement"
+      },
+      "class": "sensor",
+      "capabilities": [
+        "alarm_motion"
+      ],
+      "pair": [
+        {
+          "id": "list_devices",
+          "template": "list_devices",
+          "navigation": {
+            "next": "add_devices"
+          }
+        },
+        {
+          "id": "add_devices",
+          "template": "add_devices"
+        }
+      ],
+      "images": {
+        "small": "/drivers/motion-sensor/assets/images/small.png",
+        "large": "/drivers/motion-sensor/assets/images/large.png"
+      }
+    },
+    {
+      "id": "temperature-sensor",
+      "name": {
+        "en": "Temperature Sensor",
+        "nl": "Temperatuursensor",
+        "de": "Temperatursensor",
+        "es": "Sensor de Temperatura",
+        "fr": "Capteur de Température"
+      },
+      "class": "sensor",
+      "capabilities": [
+        "measure_temperature",
+        "measure_humidity"
+      ],
+      "pair": [
+        {
+          "id": "list_devices",
+          "template": "list_devices",
+          "navigation": {
+            "next": "add_devices"
+          }
+        },
+        {
+          "id": "add_devices",
+          "template": "add_devices"
+        }
+      ],
+      "images": {
+        "small": "/drivers/temperature-sensor/assets/images/small.png",
+        "large": "/drivers/temperature-sensor/assets/images/large.png"
+      }
+    },
+    {
+      "id": "valve",
+      "name": {
+        "en": "Valve",
+        "nl": "Klep",
+        "de": "Ventil",
+        "es": "Válvula",
+        "fr": "Vanne"
+      },
+      "class": "other",
+      "capabilities": [
+        "onoff"
+      ],
+      "pair": [
+        {
+          "id": "list_devices",
+          "template": "list_devices",
+          "navigation": {
+            "next": "add_devices"
+          }
+        },
+        {
+          "id": "add_devices",
+          "template": "add_devices"
+        }
+      ],
+      "images": {
+        "small": "/drivers/valve/assets/images/small.png",
+        "large": "/drivers/valve/assets/images/large.png"
+      }
+    },
+    {
+      "id": "presence-sensor",
+      "name": {
+        "en": "Presence Sensor",
+        "nl": "Aanwezigheidssensor",
+        "de": "Anwesenheitssensor",
+        "es": "Sensor de Presencia",
+        "fr": "Capteur de Présence"
+      },
+      "class": "sensor",
+      "capabilities": [
+        "alarm_presence"
+      ],
+      "pair": [
+        {
+          "id": "list_devices",
+          "template": "list_devices",
+          "navigation": {
+            "next": "add_devices"
+          }
+        },
+        {
+          "id": "add_devices",
+          "template": "add_devices"
+        }
+      ],
+      "images": {
+        "small": "/drivers/presence-sensor/assets/images/small.png",
+        "large": "/drivers/presence-sensor/assets/images/large.png"
+      }
+    },
+    {
+      "id": "leak-sensor",
+      "name": {
+        "en": "Leak Sensor",
+        "nl": "Leksensor",
+        "de": "Lecksensor",
+        "es": "Sensor de Fugas",
+        "fr": "Détecteur de Fuite"
+      },
+      "class": "sensor",
+      "capabilities": [
+        "alarm_water"
+      ],
+      "pair": [
+        {
+          "id": "list_devices",
+          "template": "list_devices",
+          "navigation": {
+            "next": "add_devices"
+          }
+        },
+        {
+          "id": "add_devices",
+          "template": "add_devices"
+        }
+      ],
+      "images": {
+        "small": "/drivers/leak-sensor/assets/images/small.png",
+        "large": "/drivers/leak-sensor/assets/images/large.png"
+      }
+    },
+    {
+      "id": "color-temp-light",
+      "name": {
+        "en": "Color Temperature Light",
+        "nl": "Kleurtemperatuurlamp",
+        "de": "Farbtemperaturlicht",
+        "es": "Luz de Temperatura de Color",
+        "fr": "Lumière Température de Couleur"
+      },
+      "class": "light",
+      "capabilities": [
+        "onoff",
+        "dim",
+        "light_temperature"
+      ],
+      "images": {
+        "small": "/drivers/color-temp-light/assets/images/small.png",
+        "large": "/drivers/color-temp-light/assets/images/large.png"
+      },
+      "pair": [
+        {
+          "id": "list_devices",
+          "template": "list_devices",
+          "navigation": {
+            "next": "add_devices"
+          }
+        },
+        {
+          "id": "add_devices",
+          "template": "add_devices"
+        }
+      ]
+    },
+    {
+      "id": "button",
+      "name": {
+        "en": "Button",
+        "nl": "Knop",
+        "de": "Taste",
+        "es": "Botón",
+        "fr": "Bouton"
+      },
+      "class": "button",
+      "capabilities": [],
+      "images": {
+        "small": "/drivers/button/assets/images/small.png",
+        "large": "/drivers/button/assets/images/large.png"
+      },
+      "pair": [
+        {
+          "id": "list_devices",
+          "template": "list_devices",
+          "navigation": {
+            "next": "add_devices"
+          }
+        },
+        {
+          "id": "add_devices",
+          "template": "add_devices"
+        }
+      ]
+    },
+    {
+      "id": "window-covering",
+      "name": {
+        "en": "Window Covering",
+        "nl": "Raamdekking",
+        "de": "Fensterabdeckung",
+        "es": "Cubierta de Ventana",
+        "fr": "Couverture de Fenêtre"
+      },
+      "class": "windowcoverings",
+      "capabilities": [
+        "windowcoverings_state",
+        "windowcoverings_set"
+      ],
+      "images": {
+        "small": "/drivers/window-covering/assets/images/small.png",
+        "large": "/drivers/window-covering/assets/images/large.png"
+      },
+      "pair": [
+        {
+          "id": "list_devices",
+          "template": "list_devices",
+          "navigation": {
+            "next": "add_devices"
+          }
+        },
+        {
+          "id": "add_devices",
+          "template": "add_devices"
+        }
+      ]
+    },
+    {
+      "id": "fan",
+      "name": {
+        "en": "Fan",
+        "nl": "Ventilator",
+        "de": "Lüfter",
+        "es": "Ventilador",
+        "fr": "Ventilateur"
+      },
+      "class": "fan",
+      "capabilities": [
+        "onoff",
+        "fan_speed"
+      ],
+      "images": {
+        "small": "/drivers/fan/assets/images/small.png",
+        "large": "/drivers/fan/assets/images/large.png"
+      },
+      "pair": [
+        {
+          "id": "list_devices",
+          "template": "list_devices",
+          "navigation": {
+            "next": "add_devices"
+          }
+        },
+        {
+          "id": "add_devices",
+          "template": "add_devices"
+        }
+      ]
+    }
+  ],
+  "capabilities": {
+    "alarm_presence": {
+      "type": "boolean",
+      "title": {
+        "en": "Presence",
+        "nl": "Aanwezigheid",
+        "de": "Anwesenheit",
+        "es": "Presencia",
+        "fr": "Présence"
+      },
+      "desc": {
+        "en": "True when presence is detected",
+        "nl": "Waar wanneer aanwezigheid wordt gedetecteerd",
+        "de": "Wahr, wenn Anwesenheit erkannt wird",
+        "es": "Verdadero cuando se detecta presencia",
+        "fr": "Vrai lorsque la présence est détectée"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "icon": "/assets/presence.svg"
+    }
+  },
+  "api": {
+    "getTestConnection": {
+      "method": "GET",
+      "path": "/test-connection"
+    },
+    "getWebhook": {
+      "method": "GET",
+      "path": "/webhook",
+      "public": true
+    },
+    "postWebhook": {
+      "method": "POST",
+      "path": "/webhook",
+      "public": true
+    }
+  },
+  "flow": {
+    "triggers": [
+      {
+        "id": "button_pushed",
+        "title": {
+          "en": "Button pushed",
+          "nl": "Knop ingedrukt",
+          "de": "Taste gedrückt",
+          "es": "Botón presionado",
+          "fr": "Bouton appuyé"
+        },
+        "tokens": [
+          {
+            "name": "button",
+            "type": "number",
+            "title": {
+              "en": "Button number",
+              "nl": "Knopnummer",
+              "de": "Tastennummer",
+              "es": "Número de botón",
+              "fr": "Numéro de bouton"
+            }
+          }
+        ],
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=button"
+          }
+        ]
+      },
+      {
+        "id": "button_held",
+        "title": {
+          "en": "Button held",
+          "nl": "Knop ingehouden",
+          "de": "Taste gehalten",
+          "es": "Botón mantenido",
+          "fr": "Bouton maintenu"
+        },
+        "tokens": [
+          {
+            "name": "button",
+            "type": "number",
+            "title": {
+              "en": "Button number",
+              "nl": "Knopnummer",
+              "de": "Tastennummer",
+              "es": "Número de botón",
+              "fr": "Numéro de bouton"
+            }
+          }
+        ],
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=button"
+          }
+        ]
+      },
+      {
+        "id": "button_released",
+        "title": {
+          "en": "Button released",
+          "nl": "Knop losgelaten",
+          "de": "Taste losgelassen",
+          "es": "Botón liberado",
+          "fr": "Bouton relâché"
+        },
+        "tokens": [
+          {
+            "name": "button",
+            "type": "number",
+            "title": {
+              "en": "Button number",
+              "nl": "Knopnummer",
+              "de": "Tastennummer",
+              "es": "Número de botón",
+              "fr": "Numéro de bouton"
+            }
+          }
+        ],
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=button"
+          }
+        ]
+      },
+      {
+        "id": "button_double_tapped",
+        "title": {
+          "en": "Button double tapped",
+          "nl": "Knop dubbel getikt",
+          "de": "Taste doppelt getippt",
+          "es": "Botón doble toque",
+          "fr": "Bouton double tapé"
+        },
+        "tokens": [
+          {
+            "name": "button",
+            "type": "number",
+            "title": {
+              "en": "Button number",
+              "nl": "Knopnummer",
+              "de": "Tastennummer",
+              "es": "Número de botón",
+              "fr": "Numéro de bouton"
+            }
+          }
+        ],
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=button"
+          }
+        ]
+      }
+    ],
+    "conditions": [
+      {
+        "id": "button_pushed_number",
+        "title": {
+          "en": "Button number !{{is|isn't}}",
+          "nl": "Knopnummer !{{is|is niet}}",
+          "de": "Tastennummer !{{ist|ist nicht}}",
+          "es": "Número de botón !{{es|no es}}",
+          "fr": "Numéro de bouton !{{est|n'est pas}}"
+        },
+        "titleFormatted": {
+          "en": "Button number !{{is|isn't}} [[number]]",
+          "nl": "Knopnummer !{{is|is niet}} [[number]]",
+          "de": "Tastennummer !{{ist|ist nicht}} [[number]]",
+          "es": "Número de botón !{{es|no es}} [[number]]",
+          "fr": "Numéro de bouton !{{est|n'est pas}} [[number]]"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=button"
+          },
+          {
+            "type": "number",
+            "name": "number",
+            "placeholder": {
+              "en": "Button number",
+              "nl": "Knopnummer",
+              "de": "Tastennummer",
+              "es": "Número de botón",
+              "fr": "Numéro de bouton"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "extra": {
+    "development": {
+      "ai_assisted": true,
+      "assistant": "Claude (Anthropic) Sonnet 4.5",
+      "assistant_role": "Complete application development, architecture, and all features from initial version through current release",
+      "development_started": "2024",
+      "initial_version": "1.0.0",
+      "current_version": "1.4.9",
+      "versions_developed": [
+        {
+          "version": "1.0.0",
+          "changes": "Initial application development - Complete Hubitat Elevation integration for Homey Pro including: Maker API integration, device discovery and pairing, switch, dimmer, color light, color temperature light, lock, thermostat, contact sensor, motion sensor, temperature sensor, valve, presence sensor, leak sensor, button, window covering, and fan drivers with capabilities and UI"
+        },
+        {
+          "version": "1.0.1-1.4.0",
+          "changes": "Iterative improvements, bug fixes, and feature enhancements across multiple releases"
+        },
+        {
+          "version": "1.4.1",
+          "changes": "Fixed color temperature inversion, button Flow triggers, fan/window covering detection"
+        },
+        {
+          "version": "1.4.2",
+          "changes": "Fixed fan off command (404 error), window covering stop command, added button condition card, removed export logs button"
+        },
+        {
+          "version": "1.4.3",
+          "changes": "Fixed fan on command with speed restoration, button condition state object for Flow matching"
+        },
+        {
+          "version": "1.4.4",
+          "changes": "Fixed fan control snap-back with cooldown and 5% tolerance system to prevent webhook echo loops"
+        },
+        {
+          "version": "1.4.5",
+          "changes": "Fixed Homey app validation errors (absolute vs relative image paths), added comprehensive fan logging with [FAN xxx] prefixes"
+        },
+        {
+          "version": "1.4.6",
+          "changes": "CRITICAL FIX: Implemented named speed support (low/medium-low/medium/medium-high/high) for Hubitat fan controllers that only accept string speeds, not percentages. Added version logging to app initialization."
+        },
+        {
+          "version": "1.4.7",
+          "changes": "Fixed fan ON/OFF speed restoration to save actual Hubitat speed names. Implemented slider auto-turn-on when moved while OFF (matching Home Assistant behavior). Enhanced version logging."
+        },
+        {
+          "version": "1.4.8",
+          "changes": "Fixed slider position on OFF/ON toggle - slider now correctly moves to 0% when OFF and restores saved position when ON"
+        },
+        {
+          "version": "1.4.9",
+          "changes": "Fixed polling default value bug (0 || 0.5 defaulting to 50%). Improved version logging to always show at top of logs. Added comprehensive fan_speed change tracking with stack traces for debugging."
+        }
+      ],
+      "note": "This application was developed entirely by Claude (Anthropic AI Assistant) in collaboration with the user through iterative development, debugging, and feature implementation."
+    }
+  }
+}

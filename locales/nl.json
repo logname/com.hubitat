@@ -1,0 +1,25 @@
+{
+  "settings": {
+    "title": "Hubitat Elevation Instellingen",
+    "hubitat_ip": "Hubitat IP-adres",
+    "app_id": "Maker API App ID",
+    "access_token": "Maker API Toegangstoken",
+    "test_connection": "Test Verbinding",
+    "save": "Instellingen Opslaan",
+    "connection_success": "Verbinding succesvol!",
+    "connection_failed": "Verbinding mislukt",
+    "settings_saved": "Instellingen succesvol opgeslagen",
+    "fill_all_fields": "Vul alstublieft alle velden in"
+  },
+  "pairing": {
+    "select_devices": "Selecteer apparaten om toe te voegen",
+    "no_devices_found": "Geen apparaten gevonden. Controleer alstublieft uw Hubitat Maker API configuratie.",
+    "loading": "Apparaten laden van Hubitat..."
+  },
+  "errors": {
+    "not_configured": "Hubitat instellingen niet geconfigureerd. Configureer alstublieft de app in instellingen.",
+    "connection_failed": "Kan geen verbinding maken met Hubitat. Controleer alstublieft uw instellingen.",
+    "device_control_failed": "Kan apparaat niet bedienen. Controleer alstublieft de verbinding.",
+    "device_not_found": "Apparaat niet gevonden in Hubitat."
+  }
+}

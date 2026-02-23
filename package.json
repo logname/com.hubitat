@@ -1,0 +1,11 @@
+{
+  "name": "com.hubitat.elevation",
+  "version": "1.5.0",
+  "description": "Hubitat Elevation integration for Homey Pro",
+  "main": "app.js",
+  "dependencies": {
+    "homey": "^3.2.0"
+  },
+  "author": "Homey Community",
+  "license": "GPL-3.0"
+}

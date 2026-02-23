@@ -1,0 +1,91 @@
+{
+  "1.0.0": {
+    "en": "Initial release with support for switches, dimmers, color lights, locks, thermostats, valves, and various sensors"
+  },
+  "1.1.0": {
+    "en": "Added leak sensor support, official Hubitat branding (green #7FBD00), proper app images, and improved color picker responsiveness with debouncing"
+  },
+  "1.2.0": {
+    "en": "Added Dutch, German, and Spanish localization for all drivers and UI text",
+    "nl": "Nederlandse, Duitse en Spaanse vertalingen toegevoegd voor alle drivers en UI-teksten",
+    "de": "Niederländische, deutsche und spanische Lokalisierung für alle Treiber und UI-Texte hinzugefügt",
+    "es": "Agregada localización en holandés, alemán y español para todos los controladores y textos de interfaz"
+  },
+  "1.3.0": {
+    "en": "Added French localization for all drivers and UI text",
+    "nl": "Franse vertaling toegevoegd voor alle drivers en UI-teksten",
+    "de": "Französische Lokalisierung für alle Treiber und UI-Texte hinzugefügt",
+    "es": "Agregada localización en francés para todos los controladores y textos de interfaz",
+    "fr": "Ajout de la localisation française pour tous les pilotes et textes d'interface"
+  },
+  "1.4.0": {
+    "en": "Added Color Temperature Light, Button, Window Covering, and Fan support. Increased compatibility to >=12.2.0 for fan speed capability. Fixed color tunable bulb detection.",
+    "nl": "Kleurtemperatuurlamp, knop, raamdekking en ventilator ondersteuning toegevoegd. Compatibiliteit verhoogd naar >=12.2.0 voor ventilatorsnelheid. Detectie van kleur instelbare lampen gerepareerd.",
+    "de": "Farbtemperaturlicht, Taste, Fensterabdeckung und Lüfter Unterstützung hinzugefügt. Kompatibilität auf >=12.2.0 für Lüftergeschwindigkeit erhöht. Erkennung von Farbtemperaturlampen behoben.",
+    "es": "Agregado soporte para luz de temperatura de color, botón, cubierta de ventana y ventilador. Compatibilidad aumentada a >=12.2.0 para velocidad de ventilador. Corregida detección de bombillas de temperatura de color.",
+    "fr": "Ajout du support pour lumière température de couleur, bouton, couverture de fenêtre et ventilateur. Compatibilité augmentée à >=12.2.0 pour vitesse de ventilateur. Détection des ampoules température de couleur corrigée."
+  },
+  "1.4.1": {
+    "en": "Fixed color temperature inversion bug, button Flow card triggers, and improved fan/window covering detection with FanSpeed capability support.",
+    "nl": "Kleurtemperatuur inversie bug verholpen, knop Flow kaarten triggers gerepareerd en verbeterde ventilator/raamdekking detectie met FanSpeed ondersteuning.",
+    "de": "Farbtemperatur-Invertierungsfehler behoben, Schaltflächen-Flow-Karten-Trigger korrigiert und verbesserte Lüfter-/Fensterabdeckungserkennung mit FanSpeed-Unterstützung.",
+    "es": "Corregido error de inversión de temperatura de color, triggers de tarjetas Flow de botones y detección mejorada de ventilador/cubierta con soporte FanSpeed.",
+    "fr": "Correction du bug d'inversion de température de couleur, déclencheurs de cartes Flow de bouton et détection améliorée ventilateur/couverture avec support FanSpeed."
+  },
+  "1.4.2": {
+    "en": "Fixed fan off command, window covering stop command, added button number condition for Flows, and removed broken Export Logs button.",
+    "nl": "Ventilator uit-commando gerepareerd, raamdekking stop-commando, knopnummer conditie voor Flows toegevoegd en defecte Export Logs knop verwijderd.",
+    "de": "Lüfter Aus-Befehl behoben, Fensterabdeckung Stopp-Befehl, Tastennummer-Bedingung für Flows hinzugefügt und defekte Export Logs-Schaltfläche entfernt.",
+    "es": "Corregido comando apagar ventilador, comando detener cubierta, añadida condición número de botón para Flows y eliminado botón Export Logs roto.",
+    "fr": "Correction commande arrêt ventilateur, commande arrêt couverture, ajout condition numéro bouton pour Flows et suppression bouton Export Logs cassé."
+  },
+  "1.4.3": {
+    "en": "Fixed fan on/off to use setSpeed commands, fixed button condition state for Flow filtering, added .homeybuild to ignore list.",
+    "nl": "Ventilator aan/uit gerepareerd om setSpeed te gebruiken, knop conditie status voor Flow filtering gerepareerd, .homeybuild toegevoegd aan negeerlijst.",
+    "de": "Lüfter Ein/Aus behoben um setSpeed zu verwenden, Tasten-Bedingungsstatus für Flow-Filterung behoben, .homeybuild zur Ignorierliste hinzugefügt.",
+    "es": "Corregido encendido/apagado ventilador para usar setSpeed, corregido estado condición botón para filtrado Flow, añadido .homeybuild a lista ignorar.",
+    "fr": "Correction marche/arrêt ventilateur pour utiliser setSpeed, correction état condition bouton pour filtrage Flow, ajout .homeybuild à liste ignorer."
+  },
+  "1.4.4": {
+    "en": "Fixed fan control snap-back by adding proper cooldown to on/off commands and tolerance to named speed handling.",
+    "nl": "Ventilator terugspringen gerepareerd door juiste cooldown aan/uit commando's en tolerantie voor benoemde snelheden.",
+    "de": "Lüfter Zurückspringen behoben durch ordnungsgemäße Abklingzeit für Ein/Aus-Befehle und Toleranz für benannte Geschwindigkeiten.",
+    "es": "Corregido retroceso ventilador añadiendo cooldown adecuado a comandos encendido/apagado y tolerancia manejo velocidades nombradas.",
+    "fr": "Correction retour arrière ventilateur en ajoutant cooldown approprié aux commandes marche/arrêt et tolérance gestion vitesses nommées."
+  },
+  "1.4.5": {
+    "en": "Fixed driver image paths to absolute format for validation. Added comprehensive fan logging for troubleshooting.",
+    "nl": "Driver afbeeldingspaden aangepast naar absoluut formaat voor validatie. Uitgebreide ventilator logging toegevoegd.",
+    "de": "Treiber-Bildpfade auf absolutes Format korrigiert. Umfassende Lüfter-Protokollierung hinzugefügt.",
+    "es": "Rutas imágenes controladores corregidas a formato absoluto. Registro ventilador detallado añadido.",
+    "fr": "Chemins images pilotes corrigés au format absolu. Journalisation ventilateur complète ajoutée."
+  },
+  "1.4.6": {
+    "en": "CRITICAL: Fixed fan control to send named speeds (low/medium/high) instead of percentages. Added version logging.",
+    "nl": "KRITIEK: Ventilator controle gerepareerd om benoemde snelheden (laag/medium/hoog) te sturen ipv percentages. Versie logging toegevoegd.",
+    "de": "KRITISCH: Lüftersteuerung korrigiert, sendet jetzt benannte Geschwindigkeiten (niedrig/mittel/hoch) statt Prozentsätze. Versionsprotokollierung hinzugefügt.",
+    "es": "CRÍTICO: Control ventilador corregido para enviar velocidades nombradas (bajo/medio/alto) en lugar de porcentajes. Registro versión añadido.",
+    "fr": "CRITIQUE: Contrôle ventilateur corrigé pour envoyer vitesses nommées (bas/moyen/élevé) au lieu de pourcentages. Journalisation version ajoutée."
+  },
+  "1.4.7": {
+    "en": "Fixed fan ON/OFF speed restoration, slider now turns fan ON when moved while OFF, added version number to logs.",
+    "nl": "Ventilator AAN/UIT snelheidsherstel gerepareerd, schuif schakelt nu ventilator AAN bij bewegen terwijl UIT, versienummer toegevoegd aan logs.",
+    "de": "Lüfter EIN/AUS Geschwindigkeitswiederherstellung behoben, Schieberegler schaltet Lüfter nun EIN wenn bewegt während AUS, Versionsnummer zu Logs hinzugefügt.",
+    "es": "Restauración velocidad encendido/apagado ventilador corregida, deslizador ahora enciende ventilador al mover mientras APAGADO, número versión añadido a logs.",
+    "fr": "Restauration vitesse marche/arrêt ventilateur corrigée, curseur active maintenant ventilateur si déplacé pendant ARRÊT, numéro version ajouté aux journaux."
+  },
+  "1.4.8": {
+    "en": "Fixed slider snapping to 50% when turned OFF - now goes to 0% and restores correct position when turned ON.",
+    "nl": "Schuifregelaar vastklikken op 50% bij uitschakelen opgelost - gaat nu naar 0% en herstelt juiste positie bij inschakelen.",
+    "de": "Schieberegler-Einrasten auf 50% beim Ausschalten behoben - geht jetzt auf 0% und stellt korrekte Position beim Einschalten wieder her.",
+    "es": "Corregido deslizador ajustándose a 50% al apagar - ahora va a 0% y restaura posición correcta al encender.",
+    "fr": "Correction curseur se positionnant à 50% lors de l'arrêt - va maintenant à 0% et restaure la position correcte lors de la mise en marche."
+  },
+  "1.4.9": {
+    "en": "Fixed slider returning to 50% when OFF (polling bug). Improved version logging - always visible. Added comprehensive debugging.",
+    "nl": "Schuifregelaar terugkeren naar 50% bij UIT opgelost (polling bug). Verbeterde versie logging - altijd zichtbaar. Uitgebreide debugging toegevoegd.",
+    "de": "Schieberegler-Rückkehr zu 50% beim Ausschalten behoben (Polling-Fehler). Verbesserte Versionsprotokollierung - immer sichtbar. Umfassende Fehlersuche hinzugefügt.",
+    "es": "Corregido deslizador volviendo a 50% al APAGAR (error polling). Mejor registro versión - siempre visible. Depuración completa añadida.",
+    "fr": "Correction curseur retournant à 50% lors arrêt (bug polling). Amélioration journalisation version - toujours visible. Débogage complet ajouté."
+  }
+}

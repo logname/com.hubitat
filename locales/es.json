@@ -1,0 +1,25 @@
+{
+  "settings": {
+    "title": "Configuración de Hubitat Elevation",
+    "hubitat_ip": "Dirección IP de Hubitat",
+    "app_id": "ID de Aplicación Maker API",
+    "access_token": "Token de Acceso Maker API",
+    "test_connection": "Probar Conexión",
+    "save": "Guardar Configuración",
+    "connection_success": "¡Conexión exitosa!",
+    "connection_failed": "Conexión fallida",
+    "settings_saved": "Configuración guardada exitosamente",
+    "fill_all_fields": "Por favor complete todos los campos"
+  },
+  "pairing": {
+    "select_devices": "Seleccione dispositivos para agregar",
+    "no_devices_found": "No se encontraron dispositivos. Por favor verifique su configuración de Hubitat Maker API.",
+    "loading": "Cargando dispositivos desde Hubitat..."
+  },
+  "errors": {
+    "not_configured": "Configuración de Hubitat no configurada. Por favor configure la aplicación en ajustes.",
+    "connection_failed": "Error al conectar con Hubitat. Por favor verifique su configuración.",
+    "device_control_failed": "Error al controlar el dispositivo. Por favor verifique la conexión.",
+    "device_not_found": "Dispositivo no encontrado en Hubitat."
+  }
+}

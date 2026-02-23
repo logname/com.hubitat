@@ -1,0 +1,39 @@
+# Development files
+.git
+.gitignore
+.env
+.env.example
+*.tmp
+*.log
+.DS_Store
+
+# Documentation (not needed in published app)
+CONTRIBUTING.md
+INSTALL.md
+README.md
+
+# Node modules are handled by Homey CLI
+node_modules
+
+# Build artifacts
+*.tar.gz
+*.zip
+.homeybuild
+
+# IDE files
+.vscode
+.idea
+*.swp
+*.swo
+*~
+
+# Test files
+test
+tests
+*.test.js
+*.spec.js
+
+# CI/CD
+.github
+.gitlab-ci.yml
+.travis.yml
