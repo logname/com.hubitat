@@ -90,5 +90,8 @@
   },
   "1.5.0": {
     "en": "Updated driver images, app.json and readme.txt"
+  },
+  "1.5.1": {
+    "en": "updated readme.txt and support URL"
   }
 }
