@@ -43,6 +43,12 @@
       }
     ]
   },
+  "contributing": {
+  },
+  "homeyCommunityTopicId": 150986,
+  "source": "https://github.com/logname/com.insteon",
+  "support": "https://github.com/logname/com.insteon/issues",
+  "homepage": "https://github.com/logname/com.insteon",
   "drivers": [
     {
       "id": "switch",
