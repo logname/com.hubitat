@@ -1,5 +1,3 @@
-Home Automation the way it is meant to be
-
 Features
 
 • Broad Device Support: Supports switches, dimmers, color lights, locks, thermostats, sensors, buttons, window coverings, and fans

@@ -87,5 +87,8 @@
     "de": "Schieberegler-Rückkehr zu 50% beim Ausschalten behoben (Polling-Fehler). Verbesserte Versionsprotokollierung - immer sichtbar. Umfassende Fehlersuche hinzugefügt.",
     "es": "Corregido deslizador volviendo a 50% al APAGAR (error polling). Mejor registro versión - siempre visible. Depuración completa añadida.",
     "fr": "Correction curseur retournant à 50% lors arrêt (bug polling). Amélioration journalisation version - toujours visible. Débogage complet ajouté."
+  },
+  "1.5.0": {
+    "en": "Updated driver images, app.json and readme.txt"
   }
 }
