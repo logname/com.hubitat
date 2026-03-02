@@ -321,6 +321,12 @@ Contributions are welcome! Please feel free to submit issues or pull requests.
 
 ## Changelog
 
+### Version 1.5.2 (2026-03-02)
+**Bug Fixes & Improvements**
+- Fixed Webhook URL IP Format in settings to display dots instead of dashes
+- Added Local Users note
+- Multi-Capability Device Support for Inovelli devices with multiple capabilities
+
 ### Version 1.4.9 (2026-02-11)
 **Bug Fixes & Improvements**
 - Fixed polling default value bug causing slider to snap to 50% when OFF (`0 || 0.5` defaulting to 50%)

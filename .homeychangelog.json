@@ -93,5 +93,8 @@
   },
   "1.5.1": {
     "en": "updated readme.txt and support URL"
+  },
+  "1.5.2": {
+    "en": "added support for Inovelli devices"
   }
 }
