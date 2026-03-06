@@ -8,21 +8,21 @@ class HubitatElevationApp extends Homey.App {
   async onInit() {
     const manifest = this.homey.manifest;
     this.version = manifest.version; // Store for later use
-    
+
     this.log(`========================================`);
     this.log(`Hubitat Elevation initialized`);
     this.log(`Build: ${this.version}`);
     this.log(`========================================`);
-    
+
     // Initialize log storage
     this.logs = [];
     this.maxLogs = 100;
-    
+
     // Initialize settings
     this.hubitatIP = this.homey.settings.get('hubitat_ip');
     this.makerAPIToken = this.homey.settings.get('maker_api_token');
     this.appId = this.homey.settings.get('app_id');
-    
+
     // Set up settings listener
     this.homey.settings.on('set', (key) => {
       if (key === 'hubitat_ip') {
@@ -51,21 +51,21 @@ class HubitatElevationApp extends Homey.App {
     if (loggingEnabled === false) {
       return;
     }
-    
+
     const timestamp = new Date().toISOString().substr(11, 12);
     const logEntry = `[${timestamp}] ${message}`;
-    
+
     this.logs.push(logEntry);
     if (this.logs.length > this.maxLogs) {
       this.logs.shift();
     }
-    
+
     // Add version header every 20 log entries to help with debugging
     const currentLogs = this.logs.join('\n');
     const logWithVersion = `========================================\nHubitat Elevation Build: ${this.version}\n========================================\n${currentLogs}`;
-    
+
     this.homey.settings.set('app_logs', logWithVersion);
-    
+
     // Also log normally for debugging
     this.log(message);
   }
@@ -75,7 +75,7 @@ class HubitatElevationApp extends Homey.App {
    */
   getBaseUrl() {
     this.log(`Settings - IP: ${this.hubitatIP}, App ID: ${this.appId}, Token: ${this.makerAPIToken ? 'SET' : 'NOT SET'}`);
-    
+
     if (!this.hubitatIP || !this.appId || !this.makerAPIToken) {
       const missing = [];
       if (!this.hubitatIP) missing.push('IP address');
@@ -93,7 +93,7 @@ class HubitatElevationApp extends Homey.App {
     try {
       const url = new URL(`${this.getBaseUrl()}${endpoint}`);
       url.searchParams.append('access_token', this.makerAPIToken);
-      
+
       Object.keys(params).forEach(key => {
         url.searchParams.append(key, params[key]);
       });
@@ -103,15 +103,15 @@ class HubitatElevationApp extends Homey.App {
       return new Promise((resolve, reject) => {
         http.get(url.toString(), (res) => {
           let data = '';
-          
+
           res.on('data', (chunk) => {
             data += chunk;
           });
-          
+
           res.on('end', () => {
             this.log(`Response status: ${res.statusCode}`);
             this.log(`Response data: ${data.substring(0, 200)}`);
-            
+
             try {
               if (res.statusCode !== 200) {
                 reject(new Error(`Hubitat API error: ${res.statusCode} ${res.statusMessage}`));
@@ -155,7 +155,7 @@ class HubitatElevationApp extends Homey.App {
    */
   async sendDeviceCommand(deviceId, command, parameters = []) {
     this.addLog(`>>> Sending command to device ${deviceId}: ${command} ${JSON.stringify(parameters)}`);
-    
+
     // Hubitat Maker API expects parameters in the URL path, not as query params
     // Correct: /devices/123/setLevel/75
     // Wrong: /devices/123/setLevel?param1=75
@@ -163,7 +163,7 @@ class HubitatElevationApp extends Homey.App {
     if (parameters.length > 0) {
       endpoint += '/' + parameters.join('/');
     }
-    
+
     this.addLog(`Endpoint: ${endpoint}`);
 
     try {
@@ -184,10 +184,10 @@ class HubitatElevationApp extends Homey.App {
     const attributes = hubitatDevice.attributes || [];
     const deviceType = (hubitatDevice.type || '').toLowerCase();
     const deviceName = (hubitatDevice.label || hubitatDevice.name || '').toLowerCase();
-    
+
     // Build list of compatible drivers for this device
     const compatibleDrivers = [];
-    
+
     // Check most specific device types first
     if (capabilities.includes('Thermostat')) {
       compatibleDrivers.push('thermostat');
@@ -219,14 +219,14 @@ class HubitatElevationApp extends Homey.App {
     if (capabilities.includes('Switch')) {
       compatibleDrivers.push('switch');
     }
-    
+
     // Energy management devices (PowerMeter and/or EnergyMeter capabilities)
     // These are typically monitoring-only devices without control capabilities
-    if ((capabilities.includes('PowerMeter') || capabilities.includes('EnergyMeter')) && 
+    if ((capabilities.includes('PowerMeter') || capabilities.includes('EnergyMeter')) &&
         !capabilities.includes('Switch') && !capabilities.includes('SwitchLevel')) {
       compatibleDrivers.push('energy-manager');
     }
-    
+
     if (capabilities.includes('ContactSensor')) {
       compatibleDrivers.push('contact-sensor');
     }
@@ -242,7 +242,7 @@ class HubitatElevationApp extends Homey.App {
     if (capabilities.includes('TemperatureMeasurement')) {
       compatibleDrivers.push('temperature-sensor');
     }
-    
+
     // Return array of compatible drivers (or null if none found)
     return compatibleDrivers.length > 0 ? compatibleDrivers : null;
   }
@@ -252,7 +252,7 @@ class HubitatElevationApp extends Homey.App {
    */
   async getDevicesForDriver(driverId) {
     const allDevices = await this.getDevices();
-    
+
     return allDevices.filter(device => {
       const compatibleDrivers = this.mapDeviceToDriver(device);
       // Check if this driver is in the list of compatible drivers

@@ -332,7 +332,7 @@ Contributions are welcome! Please feel free to submit issues or pull requests.
 - Fixed Webhook URL displayed IP with dashes instead of dots
 - Updated Webhook Instructions
 - Added Local Users Warning for "Webhook test" button
-- 
+-
 
 ### Version 1.4.9 (2026-02-11)
 **Bug Fixes & Improvements**

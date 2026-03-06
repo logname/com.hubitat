@@ -94,18 +94,7 @@
   "1.5.1": {
     "en": "updated readme.txt and support URL"
   },
-  "1.5.3": {
-    "en": "Added power and energy monitoring support for switches, dimmers, lights, fans, and thermostats. Fixed webhook documentation link. Multi-capability device support (Inovelli can be added as both dimmer and button).",
-    "nl": "Toegevoegd vermogen en energie monitoring voor schakelaars, dimmers, lampen, ventilatoren en thermostaten. Webhook documentatie link gerepareerd. Multi-capability apparaat ondersteuning.",
-    "de": "Leistungs- und Energieüberwachung für Schalter, Dimmer, Lichter, Lüfter und Thermostate hinzugefügt. Webhook-Dokumentationslink korrigiert. Multi-Capability-Geräteunterstützung.",
-    "es": "Añadido monitoreo de potencia y energía para interruptores, reguladores, luces, ventiladores y termostatos. Enlace de documentación de webhook corregido. Soporte de dispositivos multi-capacidad.",
-    "fr": "Ajout de la surveillance de puissance et d'énergie pour les interrupteurs, variateurs, lumières, ventilateurs et thermostats. Lien de documentation webhook corrigé. Support des appareils multi-capacités."
-  },
-  "1.6.0": {
-    "en": "Added Energy Manager device driver for monitoring-only power/energy devices. Multi-capability device support. Power and energy monitoring for switches, dimmers, lights, fans, and thermostats.",
-    "nl": "Toegevoegd Energiebeheer apparaatstuurprogramma voor alleen-monitoring stroom/energie apparaten. Multi-capability apparaat ondersteuning. Stroom- en energiemonitoring.",
-    "de": "Energiemanager-Gerätetreiber für reine Überwachungs-Strom-/Energiegeräte hinzugefügt. Multi-Capability-Geräteunterstützung. Leistungs- und Energieüberwachung.",
-    "es": "Añadido controlador de dispositivo Gestor de Energía para dispositivos de solo monitoreo de potencia/energía. Soporte de dispositivos multi-capacidad. Monitoreo de potencia y energía.",
-    "fr": "Ajout du pilote de périphérique Gestionnaire d'énergie pour les périphériques de surveillance uniquement puissance/énergie. Support multi-capacités. Surveillance de puissance et d'énergie."
+  "1.5.2": {
+    "en": "added support for Inovelli devices"
   }
 }
