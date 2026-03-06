@@ -26,6 +26,7 @@ Sensors
 • Temperature Sensors**: Temperature and humidity monitoring
 • Presence Sensors: Presence detection
 • Leak Sensors**: Water leak detection
+• Home Energy Monitors
 
 Buttons
 

@@ -1,6 +1,6 @@
 {
   "id": "com.hubitat.elevation",
-  "version": "1.5.1",
+  "version": "1.6.0",
   "compatibility": ">=12.2.0",
   "sdk": 3,
   "platforms": [
@@ -43,8 +43,7 @@
       }
     ]
   },
-  "contributing": {
-  },
+  "contributing": {},
   "homeyCommunityTopicId": 150986,
   "source": "https://github.com/logname/com.insteon",
   "support": "https://github.com/logname/com.insteon/issues",
@@ -61,7 +60,9 @@
       },
       "class": "socket",
       "capabilities": [
-        "onoff"
+        "onoff",
+        "measure_power",
+        "meter_power"
       ],
       "images": {
         "small": "/drivers/switch/assets/images/small.png",
@@ -93,7 +94,9 @@
       "class": "light",
       "capabilities": [
         "onoff",
-        "dim"
+        "dim",
+        "measure_power",
+        "meter_power"
       ],
       "pair": [
         {
@@ -129,7 +132,9 @@
         "light_hue",
         "light_saturation",
         "light_temperature",
-        "light_mode"
+        "light_mode",
+        "measure_power",
+        "meter_power"
       ],
       "pair": [
         {
@@ -193,7 +198,9 @@
       "capabilities": [
         "target_temperature",
         "measure_temperature",
-        "thermostat_mode"
+        "thermostat_mode",
+        "measure_power",
+        "meter_power"
       ],
       "pair": [
         {
@@ -401,6 +408,42 @@
       }
     },
     {
+      "id": "energy-manager",
+      "name": {
+        "en": "Energy Manager",
+        "nl": "Energiebeheer",
+        "de": "Energiemanager",
+        "es": "Gestor de Energía",
+        "fr": "Gestionnaire d'Énergie"
+      },
+      "class": "sensor",
+      "capabilities": [
+        "measure_power",
+        "meter_power"
+      ],
+      "energy": {
+        "cumulative": true,
+        "cumulativeImportedCapability": "meter_power"
+      },
+      "images": {
+        "small": "/drivers/energy-manager/assets/images/small.png",
+        "large": "/drivers/energy-manager/assets/images/large.png"
+      },
+      "pair": [
+        {
+          "id": "list_devices",
+          "template": "list_devices",
+          "navigation": {
+            "next": "add_devices"
+          }
+        },
+        {
+          "id": "add_devices",
+          "template": "add_devices"
+        }
+      ]
+    },
+    {
       "id": "color-temp-light",
       "name": {
         "en": "Color Temperature Light",
@@ -413,7 +456,9 @@
       "capabilities": [
         "onoff",
         "dim",
-        "light_temperature"
+        "light_temperature",
+        "measure_power",
+        "meter_power"
       ],
       "images": {
         "small": "/drivers/color-temp-light/assets/images/small.png",
@@ -506,7 +551,9 @@
       "class": "fan",
       "capabilities": [
         "onoff",
-        "fan_speed"
+        "fan_speed",
+        "measure_power",
+        "meter_power"
       ],
       "images": {
         "small": "/drivers/fan/assets/images/small.png",

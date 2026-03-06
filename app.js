@@ -185,44 +185,66 @@ class HubitatElevationApp extends Homey.App {
     const deviceType = (hubitatDevice.type || '').toLowerCase();
     const deviceName = (hubitatDevice.label || hubitatDevice.name || '').toLowerCase();
     
-    // Check most specific device types first (before generic Switch)
+    // Build list of compatible drivers for this device
+    const compatibleDrivers = [];
+    
+    // Check most specific device types first
     if (capabilities.includes('Thermostat')) {
-      return 'thermostat';
-    } else if (capabilities.includes('Lock')) {
-      return 'lock';
-    } else if (capabilities.includes('FanControl') || capabilities.includes('FanSpeed')) {
-      // Fan controllers - Hubitat uses both FanControl and FanSpeed capabilities
-      return 'fan';
-    } else if (capabilities.includes('WindowShade')) {
-      // Window coverings - blinds, shades, curtains
-      return 'window-covering';
-    } else if (capabilities.includes('PushableButton') || capabilities.includes('HoldableButton') || capabilities.includes('DoubleTapableButton')) {
-      return 'button';
-    } else if (capabilities.includes('ColorControl')) {
-      // Full color bulb (RGB)
-      return 'color-light';
-    } else if (capabilities.includes('ColorTemperature') && !capabilities.includes('ColorControl')) {
-      // Color temperature only (tunable white)
-      return 'color-temp-light';
-    } else if (capabilities.includes('Valve') || deviceType.includes('valve') || deviceName.includes('valve')) {
-      return 'valve';
-    } else if (capabilities.includes('SwitchLevel')) {
-      return 'dimmer';
-    } else if (capabilities.includes('Switch')) {
-      return 'switch';
-    } else if (capabilities.includes('ContactSensor')) {
-      return 'contact-sensor';
-    } else if (capabilities.includes('MotionSensor')) {
-      return 'motion-sensor';
-    } else if (capabilities.includes('PresenceSensor')) {
-      return 'presence-sensor';
-    } else if (capabilities.includes('WaterSensor')) {
-      return 'leak-sensor';
-    } else if (capabilities.includes('TemperatureMeasurement')) {
-      return 'temperature-sensor';
+      compatibleDrivers.push('thermostat');
+    }
+    if (capabilities.includes('Lock')) {
+      compatibleDrivers.push('lock');
+    }
+    if (capabilities.includes('FanControl') || capabilities.includes('FanSpeed')) {
+      compatibleDrivers.push('fan');
+    }
+    if (capabilities.includes('WindowShade')) {
+      compatibleDrivers.push('window-covering');
+    }
+    if (capabilities.includes('PushableButton') || capabilities.includes('HoldableButton') || capabilities.includes('DoubleTapableButton')) {
+      compatibleDrivers.push('button');
+    }
+    if (capabilities.includes('ColorControl')) {
+      compatibleDrivers.push('color-light');
+    }
+    if (capabilities.includes('ColorTemperature') && !capabilities.includes('ColorControl')) {
+      compatibleDrivers.push('color-temp-light');
+    }
+    if (capabilities.includes('Valve') || deviceType.includes('valve') || deviceName.includes('valve')) {
+      compatibleDrivers.push('valve');
+    }
+    if (capabilities.includes('SwitchLevel')) {
+      compatibleDrivers.push('dimmer');
+    }
+    if (capabilities.includes('Switch')) {
+      compatibleDrivers.push('switch');
     }
     
-    return null;
+    // Energy management devices (PowerMeter and/or EnergyMeter capabilities)
+    // These are typically monitoring-only devices without control capabilities
+    if ((capabilities.includes('PowerMeter') || capabilities.includes('EnergyMeter')) && 
+        !capabilities.includes('Switch') && !capabilities.includes('SwitchLevel')) {
+      compatibleDrivers.push('energy-manager');
+    }
+    
+    if (capabilities.includes('ContactSensor')) {
+      compatibleDrivers.push('contact-sensor');
+    }
+    if (capabilities.includes('MotionSensor')) {
+      compatibleDrivers.push('motion-sensor');
+    }
+    if (capabilities.includes('PresenceSensor')) {
+      compatibleDrivers.push('presence-sensor');
+    }
+    if (capabilities.includes('WaterSensor')) {
+      compatibleDrivers.push('leak-sensor');
+    }
+    if (capabilities.includes('TemperatureMeasurement')) {
+      compatibleDrivers.push('temperature-sensor');
+    }
+    
+    // Return array of compatible drivers (or null if none found)
+    return compatibleDrivers.length > 0 ? compatibleDrivers : null;
   }
 
   /**
@@ -232,8 +254,9 @@ class HubitatElevationApp extends Homey.App {
     const allDevices = await this.getDevices();
     
     return allDevices.filter(device => {
-      const mappedDriver = this.mapDeviceToDriver(device);
-      return mappedDriver === driverId;
+      const compatibleDrivers = this.mapDeviceToDriver(device);
+      // Check if this driver is in the list of compatible drivers
+      return compatibleDrivers && compatibleDrivers.includes(driverId);
     }).map(device => ({
       name: device.label || device.name,
       data: {

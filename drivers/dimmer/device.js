@@ -92,6 +92,22 @@ class DimmerDevice extends Homey.Device {
         if (levelAttr) {
           await this.setCapabilityValue('dim', parseInt(levelAttr.currentValue) / 100);
         }
+        
+        // Update power measurement if supported
+        if (this.hasCapability('measure_power')) {
+          const powerAttr = deviceInfo.attributes.find(attr => attr.name === 'power');
+          if (powerAttr && powerAttr.currentValue !== null) {
+            await this.setCapabilityValue('measure_power', parseFloat(powerAttr.currentValue));
+          }
+        }
+        
+        // Update energy measurement if supported
+        if (this.hasCapability('meter_power')) {
+          const energyAttr = deviceInfo.attributes.find(attr => attr.name === 'energy');
+          if (energyAttr && energyAttr.currentValue !== null) {
+            await this.setCapabilityValue('meter_power', parseFloat(energyAttr.currentValue));
+          }
+        }
       }
     } catch (error) {
       this.error('Error polling device state:', error);
@@ -123,8 +139,16 @@ class DimmerDevice extends Homey.Device {
         const newValue = parseInt(value) / 100;
         await this.setCapabilityValue('dim', newValue);
         this.homey.app.addLog(`[Dimmer] ✓ Set dim=${newValue}`);
+      } else if (attribute === 'power' && this.hasCapability('measure_power')) {
+        const powerValue = parseFloat(value);
+        await this.setCapabilityValue('measure_power', powerValue);
+        this.homey.app.addLog(`[Dimmer] ✓ Set measure_power=${powerValue}W`);
+      } else if (attribute === 'energy' && this.hasCapability('meter_power')) {
+        const energyValue = parseFloat(value);
+        await this.setCapabilityValue('meter_power', energyValue);
+        this.homey.app.addLog(`[Dimmer] ✓ Set meter_power=${energyValue}kWh`);
       } else {
-        this.homey.app.addLog(`[Dimmer] ! Unknown attribute: ${attribute}`);
+        this.homey.app.addLog(`[Dimmer] ! Unknown or unsupported attribute: ${attribute}`);
       }
     } catch (error) {
       this.homey.app.addLog(`[Dimmer] !!! Error: ${error.message}`);

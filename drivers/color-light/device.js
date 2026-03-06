@@ -229,6 +229,23 @@ class ColorLightDevice extends Homey.Device {
           const mode = modeAttr.currentValue === 'CT' ? 'temperature' : 'color';
           await this.setCapabilityValue('light_mode', mode);
         }
+
+        
+        // Update power measurement if supported
+        if (this.hasCapability('measure_power')) {
+          const powerAttr = deviceInfo.attributes.find(attr => attr.name === 'power');
+          if (powerAttr && powerAttr.currentValue !== null) {
+            await this.setCapabilityValue('measure_power', parseFloat(powerAttr.currentValue));
+          }
+        }
+        
+        // Update energy measurement if supported
+        if (this.hasCapability('meter_power')) {
+          const energyAttr = deviceInfo.attributes.find(attr => attr.name === 'energy');
+          if (energyAttr && energyAttr.currentValue !== null) {
+            await this.setCapabilityValue('meter_power', parseFloat(energyAttr.currentValue));
+          }
+        }
       }
     } catch (error) {
       this.error('Error polling device state:', error);
@@ -278,9 +295,15 @@ class ColorLightDevice extends Homey.Device {
         await this.setCapabilityValue('light_mode', mode);
         this.homey.app.addLog(`[Color] ✓ Set light_mode=${mode}`);
       } else if (attribute === 'colorName') {
-        this.homey.app.addLog(`[Color] Ignoring colorName=${value}`);
+        this.homey.app.addLog(`[Color] Ignoring colorName=${value}`);} else if (attribute === 'power' && this.hasCapability('measure_power')) {
+        const powerValue = parseFloat(value);
+        await this.setCapabilityValue('measure_power', powerValue);
+      } else if (attribute === 'energy' && this.hasCapability('meter_power')) {
+        const energyValue = parseFloat(value);
+        await this.setCapabilityValue('meter_power', energyValue);
+
       } else {
-        this.homey.app.addLog(`[Color] ! Unknown attribute: ${attribute}`);
+        this.homey.app.addLog(`
       }
     } catch (error) {
       this.homey.app.addLog(`[Color] !!! Error updating ${attribute}: ${error.message}`);
