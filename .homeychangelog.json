@@ -96,5 +96,8 @@
   },
   "1.5.2": {
     "en": "added support for Inovelli devices"
+  },
+  "1.6.1": {
+    "en": "corrected source, support and homepage links"
   }
 }

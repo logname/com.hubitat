@@ -4,7 +4,7 @@
   "description": "Hubitat Elevation integration for Homey Pro",
   "main": "app.js",
   "dependencies": {
-    "homey": "^2.34.0"
+    "homey": "^4.0.11"
   },
   "author": "Homey Community",
   "license": "GPL-3.0"
