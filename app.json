@@ -1,6 +1,6 @@
 {
   "id": "com.hubitat.elevation",
-  "version": "1.6.0",
+  "version": "1.6.1",
   "compatibility": ">=12.2.0",
   "sdk": 3,
   "platforms": [
@@ -45,9 +45,9 @@
   },
   "contributing": {},
   "homeyCommunityTopicId": 150986,
-  "source": "https://github.com/logname/com.insteon",
-  "support": "https://github.com/logname/com.insteon/issues",
-  "homepage": "https://github.com/logname/com.insteon",
+  "source": "https://github.com/logname/com.hubitat",
+  "support": "https://github.com/logname/com.hubitat/issues",
+  "homepage": "https://github.com/logname/com.hubitat",
   "drivers": [
     {
       "id": "switch",
