@@ -4,7 +4,7 @@ This app integrates your Hubitat Elevation hub with Homey, allowing you to contr
 
 ## Features
 
-- **Broad Device Support**: Supports switches, dimmers, color lights, locks, thermostats, sensors, buttons, window coverings, and fans
+- **Broad Device Support**: Supports switches, dimmers, color lights, garage doors, locks, thermostats, sensors, buttons, window coverings, and fans
 - **Real-time Updates**: Receive instant device state updates via webhooks
 - **Two-way Control**: Control devices from both Hubitat and Homey
 - **Easy Setup**: Simple configuration using Hubitat's Maker API
@@ -16,6 +16,7 @@ This app integrates your Hubitat Elevation hub with Homey, allowing you to contr
 - **Dimmers**: Brightness control for dimmable lights
 - **Color Lights**: Full RGB color control
 - **Color Temperature Lights**: Adjustable white color temperature (warm to cool)
+- **Garage Door**: Real-time status updates (open, closed, opening, closing)
 - **Locks**: Lock and unlock smart locks
 - **Thermostats**: Temperature control and mode selection
 - **Valves**: Control water valves and similar devices
@@ -23,11 +24,15 @@ This app integrates your Hubitat Elevation hub with Homey, allowing you to contr
 - **Fans**: Variable speed control with named speeds (low, medium-low, medium, medium-high, high)
 
 ### Sensors
+- **Air Quality Sensors**: Air quality monitoring with 5 standard Homey capabilities supported: Temperature (°C/°F), Relative humidity (%), co2 - Carbon Dioxide (ppm), pm25 - Particulate Matter 2.5 (µg/m³), pm10 - Particulate Matter 10 (µg/m³), AQI - Air Quality Index, TVOC - Total Volatile Organic Compounds
+
+
 - **Contact Sensors**: Door/window open/close detection
 - **Motion Sensors**: Motion detection
 - **Temperature Sensors**: Temperature and humidity monitoring
 - **Presence Sensors**: Presence detection
 - **Leak Sensors**: Water leak detection
+- **Energy Monitors**: Power and Energy measurement
 
 ### Buttons
 - **Push Buttons**: Trigger Flows based on button events
@@ -94,6 +99,8 @@ The app automatically maps Hubitat devices to appropriate Homey device types bas
 | PushableButton | Button | Button events (push, hold, release, double-tap) |
 | WindowShade | Window Covering | Position control for blinds/shades |
 | FanControl | Fan | Variable speed control |
+| PowerMeter, EnergyMeter | Switch + PowerMeter | `measure_power`, `meter_power`|
+
 
 ## API Reference
 
@@ -307,6 +314,7 @@ This application was developed through **AI-assisted collaborative development**
 - **v1.4.1-v1.4.5**: Bug fixes and stability improvements
 - **v1.4.6**: Critical breakthrough in fan control (named speed support)
 - **v1.4.7-v1.4.9**: UX refinements matching Home Assistant behavior
+- **v1.5.0-v1.6.0**: UX refinements and capability addtions
 
 This development approach combines:
 - AI's ability to rapidly prototype and implement complex features
@@ -320,6 +328,20 @@ This development approach combines:
 Contributions are welcome! Please feel free to submit issues or pull requests.
 
 ## Changelog
+
+### Version 1.7.0 (2026-05-20)
+**Features**
+- Added support for Garage Door Controllers
+- Added support for Air Quality Sensors
+
+### Version 1.5.0-1.6.0 (2026-03-02)
+**Bug Fixes & Improvements**
+- Added support for real-time power consumption and cumulative energy usage tracking for devices that support these features on Hubitat
+- Added Multi-Capability Device Support for Inovelli and other similar devices with multiple capabilities
+- Fixed Webhook URL displayed IP with dashes instead of dots
+- Updated Webhook Instructions
+- Added Local Users Warning for "Webhook test" button
+-
 
 ### Version 1.4.9 (2026-02-11)
 **Bug Fixes & Improvements**

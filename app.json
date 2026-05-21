@@ -1,6 +1,6 @@
 {
   "id": "com.hubitat.elevation",
-  "version": "1.5.1",
+  "version": "1.7.1",
   "compatibility": ">=12.2.0",
   "sdk": 3,
   "platforms": [
@@ -39,16 +39,15 @@
       {
         "name": "Claude (Anthropic AI Assistant)",
         "email": "ai-assistant@anthropic.com",
-        "role": "Primary developer - Full application development from v1.0.0 through v1.4.9"
+        "role": "Primary developer - Full application development from v1.0.0 through v1.7.1"
       }
     ]
   },
-  "contributing": {
-  },
+  "contributing": {},
   "homeyCommunityTopicId": 150986,
-  "source": "https://github.com/logname/com.insteon",
-  "support": "https://github.com/logname/com.insteon/issues",
-  "homepage": "https://github.com/logname/com.insteon",
+  "source": "https://github.com/logname/com.hubitat",
+  "support": "https://github.com/logname/com.hubitat/issues",
+  "homepage": "https://github.com/logname/com.hubitat",
   "drivers": [
     {
       "id": "switch",
@@ -61,7 +60,9 @@
       },
       "class": "socket",
       "capabilities": [
-        "onoff"
+        "onoff",
+        "measure_power",
+        "meter_power"
       ],
       "images": {
         "small": "/drivers/switch/assets/images/small.png",
@@ -93,7 +94,9 @@
       "class": "light",
       "capabilities": [
         "onoff",
-        "dim"
+        "dim",
+        "measure_power",
+        "meter_power"
       ],
       "pair": [
         {
@@ -129,7 +132,9 @@
         "light_hue",
         "light_saturation",
         "light_temperature",
-        "light_mode"
+        "light_mode",
+        "measure_power",
+        "meter_power"
       ],
       "pair": [
         {
@@ -193,7 +198,9 @@
       "capabilities": [
         "target_temperature",
         "measure_temperature",
-        "thermostat_mode"
+        "thermostat_mode",
+        "measure_power",
+        "meter_power"
       ],
       "pair": [
         {
@@ -308,6 +315,43 @@
       }
     },
     {
+      "id": "air-quality",
+      "name": {
+        "en": "Air Quality Sensor",
+        "nl": "Luchtkwaliteitssensor",
+        "de": "Luftqualitätssensor",
+        "es": "Sensor de Calidad del Aire",
+        "fr": "Capteur de Qualité de l'Air"
+      },
+      "class": "sensor",
+      "capabilities": [
+        "measure_temperature",
+        "measure_humidity",
+        "measure_co2",
+        "measure_pm25",
+        "measure_pm10",
+        "measure_tvoc",
+        "measure_aqi"
+      ],
+      "images": {
+        "small": "/drivers/air-quality/assets/images/small.png",
+        "large": "/drivers/air-quality/assets/images/large.png"
+      },
+      "pair": [
+        {
+          "id": "list_devices",
+          "template": "list_devices",
+          "navigation": {
+            "next": "add_devices"
+          }
+        },
+        {
+          "id": "add_devices",
+          "template": "add_devices"
+        }
+      ]
+    },
+    {
       "id": "valve",
       "name": {
         "en": "Valve",
@@ -401,6 +445,42 @@
       }
     },
     {
+      "id": "energy-manager",
+      "name": {
+        "en": "Energy Manager",
+        "nl": "Energiebeheer",
+        "de": "Energiemanager",
+        "es": "Gestor de Energía",
+        "fr": "Gestionnaire d'Énergie"
+      },
+      "class": "sensor",
+      "capabilities": [
+        "measure_power",
+        "meter_power"
+      ],
+      "energy": {
+        "cumulative": true,
+        "cumulativeImportedCapability": "meter_power"
+      },
+      "images": {
+        "small": "/drivers/energy-manager/assets/images/small.png",
+        "large": "/drivers/energy-manager/assets/images/large.png"
+      },
+      "pair": [
+        {
+          "id": "list_devices",
+          "template": "list_devices",
+          "navigation": {
+            "next": "add_devices"
+          }
+        },
+        {
+          "id": "add_devices",
+          "template": "add_devices"
+        }
+      ]
+    },
+    {
       "id": "color-temp-light",
       "name": {
         "en": "Color Temperature Light",
@@ -413,7 +493,9 @@
       "capabilities": [
         "onoff",
         "dim",
-        "light_temperature"
+        "light_temperature",
+        "measure_power",
+        "meter_power"
       ],
       "images": {
         "small": "/drivers/color-temp-light/assets/images/small.png",
@@ -495,6 +577,37 @@
       ]
     },
     {
+      "id": "garage-door",
+      "name": {
+        "en": "Garage Door",
+        "nl": "Garagedeur",
+        "de": "Garagentor",
+        "es": "Puerta de Garaje",
+        "fr": "Porte de Garage"
+      },
+      "class": "garagedoor",
+      "capabilities": [
+        "garagedoor_closed"
+      ],
+      "images": {
+        "small": "/drivers/garage-door/assets/images/small.png",
+        "large": "/drivers/garage-door/assets/images/large.png"
+      },
+      "pair": [
+        {
+          "id": "list_devices",
+          "template": "list_devices",
+          "navigation": {
+            "next": "add_devices"
+          }
+        },
+        {
+          "id": "add_devices",
+          "template": "add_devices"
+        }
+      ]
+    },
+    {
       "id": "fan",
       "name": {
         "en": "Fan",
@@ -506,7 +619,9 @@
       "class": "fan",
       "capabilities": [
         "onoff",
-        "fan_speed"
+        "fan_speed",
+        "measure_power",
+        "meter_power"
       ],
       "images": {
         "small": "/drivers/fan/assets/images/small.png",
@@ -734,7 +849,7 @@
       "assistant_role": "Complete application development, architecture, and all features from initial version through current release",
       "development_started": "2024",
       "initial_version": "1.0.0",
-      "current_version": "1.4.9",
+      "current_version": "1.7.0",
       "versions_developed": [
         {
           "version": "1.0.0",
@@ -779,6 +894,18 @@
         {
           "version": "1.4.9",
           "changes": "Fixed polling default value bug (0 || 0.5 defaulting to 50%). Improved version logging to always show at top of logs. Added comprehensive fan_speed change tracking with stack traces for debugging."
+        },
+        {
+          "version": "1.5.0",
+          "changes": "Added multi-capability device support for Inovelli and other similar devices with multiple capabilities. Fixed webhook URL displayed IP with dashes instead of dots. Added Local Users Warning for webhook test button."
+        },
+        {
+          "version": "1.6.0",
+          "changes": "Added support for real-time power consumption and cumulative energy usage tracking for devices that support these features on Hubitat."
+        },
+        {
+          "version": "1.7.0",
+          "changes": "Added support for garage door controllers and air quality sensors. "
         }
       ],
       "note": "This application was developed entirely by Claude (Anthropic AI Assistant) in collaboration with the user through iterative development, debugging, and feature implementation."

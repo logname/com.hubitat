@@ -200,6 +200,23 @@ class FanDevice extends Homey.Device {
             await this.setCapabilityValue('fan_speed', Math.max(0, Math.min(1, speedValue)));
           }
         }
+
+        
+        // Update power measurement if supported
+        if (this.hasCapability('measure_power')) {
+          const powerAttr = deviceInfo.attributes.find(attr => attr.name === 'power');
+          if (powerAttr && powerAttr.currentValue !== null) {
+            await this.setCapabilityValue('measure_power', parseFloat(powerAttr.currentValue));
+          }
+        }
+        
+        // Update energy measurement if supported
+        if (this.hasCapability('meter_power')) {
+          const energyAttr = deviceInfo.attributes.find(attr => attr.name === 'energy');
+          if (energyAttr && energyAttr.currentValue !== null) {
+            await this.setCapabilityValue('meter_power', parseFloat(energyAttr.currentValue));
+          }
+        }
       }
     } catch (error) {
       this.error('Error polling device state:', error);

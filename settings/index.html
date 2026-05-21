@@ -161,12 +161,13 @@
       <li>Scroll down and find <strong>"URL to send device events to by POST"</strong> (NOT "Send Device Events to")</li>
       <li>Enter exactly: <code id="webhook-url-full" style="background: #fff; padding: 5px; display: inline-block;">http://[HOMEY-IP]:[PORT]/api/app/com.hubitat.elevation/webhook</code></li>
       <li>Replace [HOMEY-IP] with your Homey IP and [PORT] with port shown below</li>
-      <li>Click <strong>Update</strong></li>
+      <li>Click <strong>Done</strong></li>
       <li>Toggle a device in Hubitat and watch the logs below - you should see "WEBHOOK:" entries</li>
     </ol>
     <p><strong>Your exact webhook URL:</strong> <code id="webhook-url-exact" style="background: #ffa; padding: 5px; display: block; margin-top: 10px; font-size: 14px; font-weight: bold;">Loading...</code></p>
     <p><strong>Webhook test:</strong> <button id="test-webhook-button" style="margin-left: 10px;">Test Webhook</button></p>
     <div id="webhook-test-result" style="margin-top: 10px; display: none;"></div>
+    <p style="background: #fff3cd; padding: 10px; border-left: 4px solid #ffc107; margin-top: 15px;"><strong>NOTE:</strong> The Webhook test button only functions from a Homey web app local user account. See <a href="https://support.homey.app/hc/en-us/articles/22924537226268-Using-Local-Users-on-Homey-Pro" target="_blank">Using Local Users on Homey Pro</a> for detail.</p>
     <p><strong>Last webhook received:</strong> <span id="last-webhook-time">Never</span></p>
     <p><strong>Last webhook data:</strong> <code id="last-webhook-data" style="background: #fff; padding: 5px; display: inline-block;">None</code></p>
     <p style="color: #d00;"><strong>If you don't see webhook logs when toggling devices in Hubitat, the webhook URL is not configured correctly in Maker API!</strong></p>
@@ -316,7 +317,17 @@
       });
 
       // Get and display Homey IP and port for webhook configuration
-      const homeyIP = window.location.hostname;
+      let homeyIP = window.location.hostname;
+      
+      // Convert dash-separated IP format to dot format (e.g., 192-168-0-143 → 192.168.0.143)
+      if (homeyIP.includes('.homey.homeylocal.com')) {
+        // Extract IP part and replace dashes with dots
+        homeyIP = homeyIP.split('.homey.homeylocal.com')[0].replace(/-/g, '.');
+      } else if (homeyIP.includes('-')) {
+        // Just replace dashes with dots for any other dash format
+        homeyIP = homeyIP.replace(/-/g, '.');
+      }
+      
       const homeyPort = window.location.port || '80';
       const webhookURL = `http://${homeyIP}:${homeyPort}/api/app/com.hubitat.elevation/webhook`;
       

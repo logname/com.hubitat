@@ -13,6 +13,7 @@ Actuators
 • Dimmers: Brightness control for dimmable lights
 • Color Lights: Full RGB color control
 • Color Temperature Lights: Adjustable white color temperature (warm to cool)
+• Garage Doors: Real-time status updates (open, closed, opening, closing)
 • Locks: Lock and unlock smart locks
 • Thermostats: Temperature control and mode selection
 • Valves: Control water valves and similar devices
@@ -21,6 +22,7 @@ Actuators
 
 Sensors
 
+• Air Quality Sensors: AQI, Temp (°C/°F), RH (%), co2 (ppm), pm25 (µg/m³), pm10 (µg/m³), TVOC
 • Contact Sensors: Door/window open/close detection
 • Motion Sensors: Motion detection
 • Temperature Sensors**: Temperature and humidity monitoring

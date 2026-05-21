@@ -2,18 +2,17 @@
 
 const Homey = require('homey');
 
-class SwitchDevice extends Homey.Device {
+class EnergyManagerDevice extends Homey.Device {
 
   async onInit() {
-    this.log('Switch device has been initialized');
+    this.log('Energy Manager device has been initialized');
 
-    // Register capability listeners
-    this.registerCapabilityListener('onoff', this.onCapabilityOnoff.bind(this));
+    // No capability listeners needed - this is a read-only sensor
 
-    // Set up polling for device state - faster polling for better responsiveness
+    // Set up polling for device state
     this.pollInterval = setInterval(() => {
       this.pollDeviceState();
-    }, 30000); // Poll every 30 seconds (webhooks provide real-time updates)
+    }, 30000); // Poll every 30 seconds
 
     // Initial state fetch
     await this.pollDeviceState();
@@ -22,32 +21,6 @@ class SwitchDevice extends Homey.Device {
   async onDeleted() {
     if (this.pollInterval) {
       clearInterval(this.pollInterval);
-    }
-  }
-
-  /**
-   * Handle onoff capability change
-   */
-  async onCapabilityOnoff(value) {
-    const deviceId = this.getData().id;
-    const command = value ? 'on' : 'off';
-
-    this.log(`Switch command triggered: device ${deviceId}, command ${command}, value ${value}`);
-
-    try {
-      const result = await this.homey.app.sendDeviceCommand(deviceId, command);
-      this.log(`Switch ${deviceId} command ${command} successful:`, result);
-      
-      // Poll immediately after command to get updated state quickly
-      setTimeout(() => this.pollDeviceState(), 500);
-      
-      // Homey automatically updates the capability value when we return successfully
-      // We just need to return the value to confirm the command
-      return value;
-    } catch (error) {
-      this.error('Error setting switch state:', error);
-      this.error('Error stack:', error.stack);
-      throw new Error(`Failed to control switch: ${error.message}`);
     }
   }
 
@@ -61,13 +34,7 @@ class SwitchDevice extends Homey.Device {
       const deviceInfo = await this.homey.app.getDevice(deviceId);
       
       if (deviceInfo.attributes) {
-        // Update switch state
-        const switchAttr = deviceInfo.attributes.find(attr => attr.name === 'switch');
-        if (switchAttr) {
-          await this.setCapabilityValue('onoff', switchAttr.currentValue === 'on');
-        }
-        
-        // Update power measurement if supported
+        // Update power measurement
         if (this.hasCapability('measure_power')) {
           const powerAttr = deviceInfo.attributes.find(attr => attr.name === 'power');
           if (powerAttr && powerAttr.currentValue !== null) {
@@ -75,7 +42,7 @@ class SwitchDevice extends Homey.Device {
           }
         }
         
-        // Update energy measurement if supported
+        // Update energy measurement
         if (this.hasCapability('meter_power')) {
           const energyAttr = deviceInfo.attributes.find(attr => attr.name === 'energy');
           if (energyAttr && energyAttr.currentValue !== null) {
@@ -96,12 +63,7 @@ class SwitchDevice extends Homey.Device {
     this.log(`Attribute: "${attribute}", Value: "${value}"`);
 
     try {
-      if (attribute === 'switch') {
-        const newValue = value === 'on';
-        this.log(`Setting onoff to: ${newValue}`);
-        await this.setCapabilityValue('onoff', newValue);
-        this.log(`✓ onoff updated to ${newValue}`);
-      } else if (attribute === 'power' && this.hasCapability('measure_power')) {
+      if (attribute === 'power' && this.hasCapability('measure_power')) {
         const powerValue = parseFloat(value);
         this.log(`Setting measure_power to: ${powerValue}W`);
         await this.setCapabilityValue('measure_power', powerValue);
@@ -120,4 +82,4 @@ class SwitchDevice extends Homey.Device {
   }
 }
 
-module.exports = SwitchDevice;
+module.exports = EnergyManagerDevice;
