@@ -310,6 +310,14 @@ class FanDevice extends Homey.Device {
       } else {
         this.log(`[FAN WEBHOOK] NOT UPDATING - difference too small (tolerance: 5%)`);
       }
+    } else if (attribute === 'power' && this.hasCapability('measure_power')) {
+      const powerValue = parseFloat(value);
+      await this.setCapabilityValue('measure_power', powerValue);
+      this.log(`[FAN WEBHOOK] ✓ Set measure_power=${powerValue}W`);
+    } else if (attribute === 'energy' && this.hasCapability('meter_power')) {
+      const energyValue = parseFloat(value);
+      await this.setCapabilityValue('meter_power', energyValue);
+      this.log(`[FAN WEBHOOK] ✓ Set meter_power=${energyValue}kWh`);
     }
   }
 }

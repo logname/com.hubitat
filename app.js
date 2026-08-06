@@ -2,6 +2,7 @@
 
 const Homey = require('homey');
 const http = require('http');
+const https = require('https');
 
 class HubitatElevationApp extends Homey.App {
 
@@ -83,42 +84,81 @@ class HubitatElevationApp extends Homey.App {
       if (!this.makerAPIToken) missing.push('Access Token');
       throw new Error(`Hubitat settings not configured. Missing: ${missing.join(', ')}`);
     }
-    return `http://${this.hubitatIP}/apps/api/${this.appId}`;
+
+    // Use https if Hubitat previously redirected us there
+    const protocol = this._forceHttps ? 'https' : 'http';
+    return `${protocol}://${this.hubitatIP}/apps/api/${this.appId}`;
   }
 
   /**
-   * Make a request to Hubitat Maker API
+   * Make a request to Hubitat Maker API, following redirects (e.g. HTTP → HTTPS)
    */
-  async makeRequest(endpoint, params = {}) {
+  async makeRequest(endpoint, params = {}, redirectCount = 0) {
+    const MAX_REDIRECTS = 5;
+
     try {
       const url = new URL(`${this.getBaseUrl()}${endpoint}`);
       url.searchParams.append('access_token', this.makerAPIToken);
-      
+
       Object.keys(params).forEach(key => {
         url.searchParams.append(key, params[key]);
       });
 
       this.log(`Making request to: ${url.toString().replace(this.makerAPIToken, 'XXXXX')}`);
 
+      // Choose http or https module based on protocol
+      const transport = url.protocol === 'https:' ? https : http;
+
       return new Promise((resolve, reject) => {
-        http.get(url.toString(), (res) => {
+        transport.get(url.toString(), (res) => {
           let data = '';
-          
+
           res.on('data', (chunk) => {
             data += chunk;
           });
-          
-          res.on('end', () => {
+
+          res.on('end', async () => {
             this.log(`Response status: ${res.statusCode}`);
-            this.log(`Response data: ${data.substring(0, 200)}`);
-            
+
             try {
-              if (res.statusCode !== 200) {
-                reject(new Error(`Hubitat API error: ${res.statusCode} ${res.statusMessage}`));
-              } else {
-                const json = JSON.parse(data);
-                resolve(json);
+              // Follow 301/302/303/307/308 redirects
+              if ([301, 302, 303, 307, 308].includes(res.statusCode)) {
+                const location = res.headers['location'];
+                if (!location) {
+                  return reject(new Error(`Redirect with no Location header (${res.statusCode})`));
+                }
+                if (redirectCount >= MAX_REDIRECTS) {
+                  return reject(new Error(`Too many redirects (>${MAX_REDIRECTS})`));
+                }
+
+                this.log(`Redirect ${res.statusCode} → ${location}`);
+
+                // If the redirect is to an absolute URL on a different scheme/host,
+                // update getBaseUrl by switching to https for all future requests
+                const redirectUrl = new URL(location);
+                if (redirectUrl.protocol === 'https:' && this.getBaseUrl().startsWith('http:')) {
+                  this.log(`Hubitat redirected to HTTPS — switching all future requests to HTTPS`);
+                  this._forceHttps = true;
+                }
+
+                // Re-issue the original endpoint against the new base
+                try {
+                  const result = await this.makeRequest(endpoint, params, redirectCount + 1);
+                  resolve(result);
+                } catch (err) {
+                  reject(err);
+                }
+                return;
               }
+
+              if (res.statusCode !== 200) {
+                this.log(`Response data: ${data.substring(0, 200)}`);
+                return reject(new Error(`Hubitat API error: ${res.statusCode} ${res.statusMessage}`));
+              }
+
+              const json = JSON.parse(data);
+              resolve(json);
+
             } catch (error) {
               this.error(`Failed to parse response: ${error.message}`);
               this.error(`Raw data: ${data}`);

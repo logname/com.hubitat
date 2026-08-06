@@ -117,5 +117,11 @@
   },
   "1.7.1": {
     "en": "Added support for Garage Door Controllers and Air Quality Sensors"
+  },
+  "1.7.2": {
+    "en": "Bug fix for corrupted handleAttributeUpdate in color lights, fans and thermostats"
+  },
+  "1.7.3": {
+    "en": "Automatic HTTP → HTTPS switching — if Hubitat redirects to https://, the _forceHttps flag is set and all subsequent requests use HTTPS automatically, without the user needing to change any settings."
   }
 }

@@ -329,6 +329,13 @@ Contributions are welcome! Please feel free to submit issues or pull requests.
 
 ## Changelog
 
+### Version 1.7.3 (2026-08-06)
+**Bug Fixes & Improvements**
+- Added https module alongside http so both protocols are available
+- makeRequest now follows redirects — handles status codes 301, 302, 303, 307, 308:
+- Automatic HTTP to HTTPS redirect
+- getBaseUrl respects the flag and returns https:// once a redirect has been detected.
+
 ### Version 1.7.0 (2026-05-20)
 **Features**
 - Added support for Garage Door Controllers

@@ -1,6 +1,6 @@
 {
   "id": "com.hubitat.elevation",
-  "version": "1.7.1",
+  "version": "1.7.3",
   "compatibility": ">=12.2.0",
   "sdk": 3,
   "platforms": [
@@ -39,7 +39,7 @@
       {
         "name": "Claude (Anthropic AI Assistant)",
         "email": "ai-assistant@anthropic.com",
-        "role": "Primary developer - Full application development from v1.0.0 through v1.7.1"
+        "role": "Primary developer - Full application development from v1.0.0 through v1.7.3"
       }
     ]
   },
@@ -906,6 +906,10 @@
         {
           "version": "1.7.0",
           "changes": "Added support for garage door controllers and air quality sensors. "
+        },
+        {
+          "version": "1.7.1",
+          "changes": "Bug fix for corrupted handleAttributeUpdate in color lights, fans and thermostats. "
         }
       ],
       "note": "This application was developed entirely by Claude (Anthropic AI Assistant) in collaboration with the user through iterative development, debugging, and feature implementation."

@@ -122,6 +122,10 @@ class ThermostatDevice extends Homey.Device {
     } else if (attribute === 'heatingSetpoint' || attribute === 'coolingSetpoint') {
       // Re-poll to get the correct target temperature based on mode
       await this.pollDeviceState();
+    } else if (attribute === 'power' && this.hasCapability('measure_power')) {
+      await this.setCapabilityValue('measure_power', parseFloat(value));
+    } else if (attribute === 'energy' && this.hasCapability('meter_power')) {
+      await this.setCapabilityValue('meter_power', parseFloat(value));
     }
   }
 }

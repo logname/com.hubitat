@@ -295,15 +295,17 @@ class ColorLightDevice extends Homey.Device {
         await this.setCapabilityValue('light_mode', mode);
         this.homey.app.addLog(`[Color] ✓ Set light_mode=${mode}`);
       } else if (attribute === 'colorName') {
-        this.homey.app.addLog(`[Color] Ignoring colorName=${value}`);} else if (attribute === 'power' && this.hasCapability('measure_power')) {
+        this.homey.app.addLog(`[Color] Ignoring colorName=${value}`);
+      } else if (attribute === 'power' && this.hasCapability('measure_power')) {
         const powerValue = parseFloat(value);
         await this.setCapabilityValue('measure_power', powerValue);
+        this.homey.app.addLog(`[Color] ✓ Set measure_power=${powerValue}W`);
       } else if (attribute === 'energy' && this.hasCapability('meter_power')) {
         const energyValue = parseFloat(value);
         await this.setCapabilityValue('meter_power', energyValue);
-
+        this.homey.app.addLog(`[Color] ✓ Set meter_power=${energyValue}kWh`);
       } else {
-        this.homey.app.addLog(`
+        this.homey.app.addLog(`[Color] ! Unknown or unsupported attribute: ${attribute}`);
       }
     } catch (error) {
       this.homey.app.addLog(`[Color] !!! Error updating ${attribute}: ${error.message}`);
